@@ -58,6 +58,7 @@ class _ProcessListState extends State<ProcessList> {
   Widget listViewWidget(List<Process> process) {
     return Container(
       child: ListView.builder(
+        itemCount: process.length,
         padding: const EdgeInsets.all(2.0),
         itemBuilder: (context, position) {
           return Card(
