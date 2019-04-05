@@ -55,6 +55,22 @@ class _ProcessListState extends State<ProcessList> {
     return list;
   }
 
+  Future<void> deleteData(processId) async {
+    final storage = new FlutterSecureStorage();
+    String token = await storage.read(key: 'token');
+
+    String link = "http://192.168.254.102:8023/process/$processId";
+
+    Map<String, String> headers = {
+      'x-access-token': token,
+    };
+
+    var response = await http.delete(
+      link,
+      headers: headers,
+    );
+  }
+
   Widget listViewWidget(List<Process> process) {
     return Container(
       child: ListView.builder(
@@ -62,7 +78,7 @@ class _ProcessListState extends State<ProcessList> {
         padding: const EdgeInsets.all(2.0),
         itemBuilder: (context, position) {
           return Card(
-            child: ListTile(
+            child: ExpansionTile(
               title: Text(
                 '${process[position].name}',
                 style: TextStyle(
@@ -71,7 +87,62 @@ class _ProcessListState extends State<ProcessList> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onTap: () => _onTapItem(context, process[position]),
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text(
+                              "Temperature: ${process[position].setTemp}°C"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text(
+                              "Timer: ${process[position].cookTime} seconds"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text(
+                              "Interval: ${process[position].readInt} seconds"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new IconButton(
+                            icon: Icon(Icons.delete_forever),
+                            iconSize: 30.0,
+                            onPressed: () {
+                              _onTapDelete(context, process[position],
+                                  process[position].processId);
+                              setState(() {
+                                process.remove(process[position]);
+                              });
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new IconButton(
+                            icon: Icon(Icons.keyboard_arrow_right),
+                            iconSize: 30.0,
+                            onPressed: () => _onTapItem(context,
+                                process[position], process[position].processId),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           );
         },
@@ -79,9 +150,13 @@ class _ProcessListState extends State<ProcessList> {
     );
   }
 
-  void _onTapItem(BuildContext context, Process process) {
+  void _onTapItem(BuildContext context, Process process, String processId) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+  }
+
+  void _onTapDelete(BuildContext context, Process process, String processId) {
+    deleteData(processId);
   }
 
   @override
