@@ -29,7 +29,7 @@ class _ProcessListState extends State<ProcessList> {
     final storage = new FlutterSecureStorage();
 
     String link;
-    link = "http://192.168.254.102:8023/app/process";
+    link = "http://192.168.254.102:8023/process";
     String token = await storage.read(key: 'token');
 
     Map<String, String> headers = {
@@ -46,7 +46,7 @@ class _ProcessListState extends State<ProcessList> {
     setState(() {
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        var rest = data["process"] as List;
+        var rest = data as List;
         print(rest);
         list = rest.map<Process>((json) => Process.fromJson(json)).toList();
       }
@@ -121,12 +121,6 @@ class _ProcessListState extends State<ProcessList> {
                             icon: Icon(Icons.delete_forever),
                             iconSize: 30.0,
                             onPressed: () async {
-                              /* _showDeleteDialog(process[position].name,
-                                  process[position].processId);
-                              setState(() {
-                                process.remove(process[position]);
-                              }); */
-
                               bool shouldUpdate = await showDialog(
                                   context: this.context,
                                   builder: (BuildContext context) {
@@ -152,7 +146,7 @@ class _ProcessListState extends State<ProcessList> {
                                         ]);
                                   });
                               setState(() {
-                                shouldUpdate
+                                shouldUpdate == true || shouldUpdate != null
                                     ? process.remove(process[position])
                                     : null;
                               });
@@ -183,32 +177,6 @@ class _ProcessListState extends State<ProcessList> {
   void _onTapItem(BuildContext context, Process process, String processId) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-  }
-
-  void _showDeleteDialog(name, processId) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text("Delete data?"),
-            content: new Text("Are you sure you want to delete the data $name"),
-            actions: <Widget>[
-              new FlatButton(
-                child: new Text("Cancel"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              new FlatButton(
-                child: new Text("Confirm"),
-                onPressed: () {
-                  deleteData(processId);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
   }
 
   @override
