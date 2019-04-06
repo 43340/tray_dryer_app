@@ -120,11 +120,41 @@ class _ProcessListState extends State<ProcessList> {
                           child: new IconButton(
                             icon: Icon(Icons.delete_forever),
                             iconSize: 30.0,
-                            onPressed: () {
-                              _onTapDelete(context, process[position],
+                            onPressed: () async {
+                              /* _showDeleteDialog(process[position].name,
                                   process[position].processId);
                               setState(() {
                                 process.remove(process[position]);
+                              }); */
+
+                              bool shouldUpdate = await showDialog(
+                                  context: this.context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        title: new Text("Delete data?"),
+                                        content: new Text(
+                                            "Are you sure you want to delete the data ${process[position].name}"),
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            child: new Text("Cancel"),
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                          ),
+                                          new FlatButton(
+                                            child: new Text("Confirm"),
+                                            onPressed: () {
+                                              deleteData(
+                                                  process[position].processId);
+                                              Navigator.pop(context, true);
+                                            },
+                                          ),
+                                        ]);
+                                  });
+                              setState(() {
+                                shouldUpdate
+                                    ? process.remove(process[position])
+                                    : null;
                               });
                             },
                           ),
@@ -155,8 +185,30 @@ class _ProcessListState extends State<ProcessList> {
         .push(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
   }
 
-  void _onTapDelete(BuildContext context, Process process, String processId) {
-    deleteData(processId);
+  void _showDeleteDialog(name, processId) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Delete data?"),
+            content: new Text("Are you sure you want to delete the data $name"),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Cancel"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              new FlatButton(
+                child: new Text("Confirm"),
+                onPressed: () {
+                  deleteData(processId);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 
   @override
