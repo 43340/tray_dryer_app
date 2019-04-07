@@ -2,24 +2,23 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:tray_dryer_app/authentication/authentication.dart';
-import 'package:tray_dryer_app/common/common.dart';
 import 'package:tray_dryer_app/models/process_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:tray_dryer_app/records/details.dart';
+import 'package:tray_dryer_app/authentication/authentication.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProcessList extends StatefulWidget {
+class ProcessListAll extends StatefulWidget {
   final String title;
 
-  ProcessList(this.title);
+  ProcessListAll(this.title);
 
   @override
-  _ProcessListState createState() => _ProcessListState();
+  _ProcessListAllState createState() => _ProcessListAllState();
 }
 
-class _ProcessListState extends State<ProcessList> {
+class _ProcessListAllState extends State<ProcessListAll> {
   List<Process> list;
 
   @override
@@ -32,7 +31,7 @@ class _ProcessListState extends State<ProcessList> {
     final storage = new FlutterSecureStorage();
 
     String link;
-    link = "http://192.168.254.102:8023/process";
+    link = "http://192.168.254.102:8023/process/admin";
     String token = await storage.read(key: 'token');
 
     Map<String, String> headers = {
@@ -55,7 +54,25 @@ class _ProcessListState extends State<ProcessList> {
         print("List Size: ${list.length}");
         return list;
       } else {
-        sessionExpired(context);
+        final AuthenticationBloc authenticationBloc =
+            BlocProvider.of<AuthenticationBloc>(context);
+        authenticationBloc.dispatch(LoggedOut());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: new Text("Delete data?"),
+                  content: new Text("Session Expired. Please login again."),
+                  actions: <Widget>[
+                    new FlatButton(
+                      child: new Text("Ok"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ]);
+            });
       }
     });
   }
@@ -74,10 +91,6 @@ class _ProcessListState extends State<ProcessList> {
       link,
       headers: headers,
     );
-
-    if (response.statusCode != 200) {
-      sessionExpired(context);
-    }
   }
 
   Widget listViewWidget(List<Process> process) {
@@ -97,12 +110,17 @@ class _ProcessListState extends State<ProcessList> {
                 ),
               ),
               children: <Widget>[
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text("User: ${process[position].userId}"),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new Text(
@@ -120,7 +138,7 @@ class _ProcessListState extends State<ProcessList> {
                         ),
                       ],
                     ),
-                    Row(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

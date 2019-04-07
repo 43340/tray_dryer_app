@@ -85,14 +85,44 @@ class _LoginFormState extends State<LoginForm> {
         return Form(
           child: Column(
             children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'username'),
-                controller: _usernameController,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    )),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.blueAccent,
+                      width: 2.0,
+                    )),
+                  ),
+                  controller: _usernameController,
+                ),
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'password'),
-                controller: _passwordController,
-                obscureText: true,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    )),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                      color: Colors.blueAccent,
+                      width: 2.0,
+                    )),
+                  ),
+                  controller: _passwordController,
+                  obscureText: true,
+                ),
               ),
               RaisedButton(
                 onPressed:

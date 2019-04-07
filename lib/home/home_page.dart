@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:tray_dryer_app/data_input/data_input.dart';
+import 'package:tray_dryer_app/start_new/start_new.dart';
 import 'package:tray_dryer_app/add_user/add_user.dart';
+import 'package:tray_dryer_app/all_users/all_users.dart';
 import 'package:tray_dryer_app/records/records.dart';
+import 'package:tray_dryer_app/records/all_records.dart';
 import 'package:tray_dryer_app/repository/data_repository/data_repository.dart';
 import 'package:tray_dryer_app/repository/new_user_repository/new_user_repository.dart';
 import 'package:tray_dryer_app/authentication/authentication.dart';
@@ -41,9 +43,8 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DataInputPage(
-                              dataRepository: dataRepository,
-                            )),
+                        builder: (context) =>
+                            StartNewProcess("Start New Process")),
                   );
                 },
               ),
@@ -67,9 +68,31 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AddUserPage(
-                              newUserRepository: newUserRepository,
-                            )),
+                        builder: (context) => AddNewUser("Add User")),
+                  );
+                },
+              ),
+            ),
+            Container(
+              child: RaisedButton(
+                child: Text('All Users'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UsersView("All Users")),
+                  );
+                },
+              ),
+            ),
+            Container(
+              child: RaisedButton(
+                child: Text('All Processes'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProcessListAll("All Processes")),
                   );
                 },
               ),

@@ -86,14 +86,14 @@ packages:
     source: hosted
     version: "3.0.1"
   built_collection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: built_collection
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.0"
   built_value:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: built_value
       url: "https://pub.dartlang.org"

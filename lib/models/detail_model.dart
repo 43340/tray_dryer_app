@@ -1,7 +1,7 @@
 class Details {
   String processId;
-  int temperature;
-  int humidity;
+  num temperature;
+  num humidity;
   String timeStamp;
 
   Details({this.processId, this.temperature, this.humidity, this.timeStamp});

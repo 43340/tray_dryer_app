@@ -33,13 +33,13 @@ class NewUserRepository {
     switch (response.statusCode) {
       case 401:
         {
-          throw Exception('Invalid token. Please login again');
+          throw "Invalid token.";
         }
         break;
 
       case 409:
         {
-          throw Exception('User Exist!');
+          throw "User exist";
         }
         break;
 

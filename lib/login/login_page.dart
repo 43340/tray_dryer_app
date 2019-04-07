@@ -39,8 +39,13 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: LoginForm(
-          authenticationBloc: _authenticationBloc, loginBloc: _loginBloc),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LoginForm(
+              authenticationBloc: _authenticationBloc, loginBloc: _loginBloc),
+        ),
+      ),
     );
   }
 
