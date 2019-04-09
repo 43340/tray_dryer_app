@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tray_dryer_app/common/common.dart';
 
 import 'package:tray_dryer_app/start_new/start_new.dart';
 import 'package:tray_dryer_app/add_user/add_user.dart';
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
     NewUserRepository newUserRepository = new NewUserRepository();
 
     return Scaffold(
+      drawer: new MyDrawer(),
       appBar: AppBar(
         title: Text('Home'),
       ),

@@ -12,6 +12,9 @@ class UserRepository {
   }) async {
     final String url = "http://192.168.254.102:8023/login";
     String token;
+    bool admin;
+    final storage = new FlutterSecureStorage();
+
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
@@ -23,6 +26,8 @@ class UserRepository {
       print(response.statusCode);
 
       token = LoginModel.fromJson(responseJson).token;
+      admin = LoginModel.fromJson(responseJson).admin;
+      await storage.write(key: 'admin', value: admin.toString());
     } else {
       //throw Exception('Login Failed. Please check username and password');
       throw Error();

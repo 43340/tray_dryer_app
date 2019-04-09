@@ -59,7 +59,7 @@ class _DetailsViewState extends State<DetailsView> {
           DataColumn(
             label: Text(
               "Temperature",
-              style: TextStyle(color: Colors.red, fontSize: 16.0),
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
             ),
             numeric: false,
             onSort: (i, b) {},
@@ -68,7 +68,7 @@ class _DetailsViewState extends State<DetailsView> {
           DataColumn(
             label: Text(
               "Humidity",
-              style: TextStyle(color: Colors.green, fontSize: 16.0),
+              style: TextStyle(color: Colors.green, fontSize: 14.0),
             ),
             numeric: false,
             onSort: (i, b) {},
@@ -76,7 +76,7 @@ class _DetailsViewState extends State<DetailsView> {
           ),
           DataColumn(
             label: Text("Time",
-                style: TextStyle(color: Colors.blue, fontSize: 16.0)),
+                style: TextStyle(color: Colors.blue, fontSize: 14.0)),
             numeric: false,
             onSort: (i, b) {},
             tooltip: "Recorded Time",

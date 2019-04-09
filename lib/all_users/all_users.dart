@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tray_dryer_app/add_user/add_user.dart';
 import 'package:tray_dryer_app/authentication/authentication.dart';
 import 'package:tray_dryer_app/models/users_model.dart';
 import 'package:http/http.dart' as http;
@@ -166,6 +167,15 @@ class _UsersViewState extends State<UsersView> {
           : Center(
               child: CircularProgressIndicator(),
             ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.person_add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddNewUser("Add User")),
+          );
+        },
+      ),
     );
   }
 }
