@@ -16,103 +16,75 @@ import 'package:tray_dryer_app/current/current.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AuthenticationBloc authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
-
-    DataRepository dataRepository = new DataRepository();
-    NewUserRepository newUserRepository = new NewUserRepository();
-
     return Scaffold(
-      drawer: new MyDrawer(),
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: RaisedButton(
-                child: Text('Logout'),
-                onPressed: () {
-                  authenticationBloc.dispatch(LoggedOut());
-                },
-              ),
-            ),
-            Container(
-              child: RaisedButton(
-                child: Text('New Process'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            StartNewProcess("Start New Process")),
-                  );
-                },
-              ),
-            ),
-            Container(
-              child: RaisedButton(
-                child: Text('Records'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProcessList("Records")),
-                  );
-                },
-              ),
-            ),
-            Container(
-              child: RaisedButton(
-                child: Text('Add User'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AddNewUser("Add User")),
-                  );
-                },
-              ),
-            ),
-            Container(
-              child: RaisedButton(
-                child: Text('All Users'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UsersView("All Users")),
-                  );
-                },
-              ),
-            ),
-            Container(
-              child: RaisedButton(
-                child: Text('All Processes'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProcessListAll("All Processes")),
-                  );
-                },
-              ),
-            ),
-            /* Container(
-              child: RaisedButton(
-                child: Text('Current Process'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
-                  );
-                },
-              ),
-            ), */
-          ],
+        drawer: MyDrawer(),
+        appBar: AppBar(
+          title: Text("Home"),
         ),
-      ),
-    );
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/mmsu-logo.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.asset(
+                    'assets/coe-logo.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.asset(
+                    'assets/icpep-logo.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text(
+                    "Tray Dryer\nController",
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text(
+                    "Swipe from the left or \npress the Menu icon above \nto show options.",
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ));
   }
 }

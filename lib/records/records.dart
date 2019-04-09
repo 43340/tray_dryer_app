@@ -112,7 +112,7 @@ class _ProcessListState extends State<ProcessList> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new Text(
-                              "Timer: ${process[position].cookTime} seconds"),
+                              "Process Timer: ${Duration(seconds: process[position].cookTime).toString().padLeft(15, '0').substring(0, 8)} seconds"),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),

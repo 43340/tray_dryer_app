@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tray_dryer_app/add_user/add_user.dart';
 import 'package:tray_dryer_app/all_users/all_users.dart';
 import 'package:tray_dryer_app/authentication/authentication.dart';
+import 'package:tray_dryer_app/current/current.dart';
 import 'package:tray_dryer_app/home/home.dart';
 import 'package:tray_dryer_app/records/all_records.dart';
 import 'package:tray_dryer_app/records/records.dart';
@@ -34,29 +35,31 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          new ListTile(
-            leading: new Icon(Icons.add),
-            title: new Text("New Process"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => StartNewProcess("Start New Process")),
-              );
-            },
+          Card(
+            child: ListTile(
+              leading: new Icon(Icons.add),
+              title: new Text("New Process"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          StartNewProcess("Start New Process")),
+                );
+              },
+            ),
           ),
-          new ListTile(
+          ListTile(
             leading: new Icon(Icons.timer),
             title: new Text("Current Process"),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => StartNewProcess("Start New Process")),
+                MaterialPageRoute(builder: (context) => CurrentPage()),
               );
             },
           ),
-          new ListTile(
+          ListTile(
             leading: Icon(Icons.folder),
             title: new Text("Records"),
             onTap: () {
@@ -88,13 +91,12 @@ class MyDrawer extends StatelessWidget {
                 padding: EdgeInsets.only(left: 32),
                 child: ListTile(
                   leading: Icon(Icons.folder_open),
-                  title: Text("Manage Processes"),
+                  title: Text("Manage Records"),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              ProcessListAll("All Processes")),
+                          builder: (context) => ProcessListAll("All Records")),
                     );
                   },
                 ),
