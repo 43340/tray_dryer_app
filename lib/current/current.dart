@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tray_dryer_app/common/common.dart';
 
-final String url = "http://192.168.254.102:8023/data";
+final String url = "http://$BASE_URL:8023/data";
 
 class CurrentPage extends StatefulWidget {
   @override

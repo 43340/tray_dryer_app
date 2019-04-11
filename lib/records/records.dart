@@ -32,7 +32,7 @@ class _ProcessListState extends State<ProcessList> {
     final storage = new FlutterSecureStorage();
 
     String link;
-    link = "http://192.168.254.102:8023/process";
+    link = "http://$BASE_URL:8023/process";
     String token = await storage.read(key: 'token');
 
     Map<String, String> headers = {
@@ -64,7 +64,7 @@ class _ProcessListState extends State<ProcessList> {
     final storage = new FlutterSecureStorage();
     String token = await storage.read(key: 'token');
 
-    String link = "http://192.168.254.102:8023/process/$processId";
+    String link = "http://$BASE_URL:8023/process/$processId";
 
     Map<String, String> headers = {
       'x-access-token': token,

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:tray_dryer_app/common/common.dart';
 
 class NewUserRepository {
   Future<void> send({
@@ -13,7 +14,7 @@ class NewUserRepository {
     final storage = new FlutterSecureStorage();
 
     String token = await storage.read(key: 'token');
-    final String url = "http://192.168.254.102:8023/user";
+    final String url = "http://$BASE_URL:8023/user";
     Map<String, String> headers = {
       'x-access-token': token,
       'content-type': 'application/json'

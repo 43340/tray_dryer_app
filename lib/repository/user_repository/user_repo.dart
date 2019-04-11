@@ -2,6 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tray_dryer_app/common/common.dart';
 
 import 'package:tray_dryer_app/models/login_model.dart';
 
@@ -10,7 +11,7 @@ class UserRepository {
     @required String username,
     @required String password,
   }) async {
-    final String url = "http://192.168.254.102:8023/login";
+    final String url = "http://$BASE_URL:8023/login";
     String token;
     bool admin;
     final storage = new FlutterSecureStorage();

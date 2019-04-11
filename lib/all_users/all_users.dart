@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tray_dryer_app/add_user/add_user.dart';
 import 'package:tray_dryer_app/authentication/authentication.dart';
+import 'package:tray_dryer_app/common/common.dart';
 import 'package:tray_dryer_app/models/users_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,7 +32,7 @@ class _UsersViewState extends State<UsersView> {
     final storage = new FlutterSecureStorage();
     String token = await storage.read(key: 'token');
 
-    String link = "http://192.168.254.102:8023/user";
+    String link = "http://$BASE_URL:8023/user";
 
     Map<String, String> headers = {
       'x-access-token': token,
@@ -80,7 +81,7 @@ class _UsersViewState extends State<UsersView> {
     final storage = new FlutterSecureStorage();
     String token = await storage.read(key: 'token');
 
-    String link = "http://192.168.254.102:8023/user/$userId";
+    String link = "http://$BASE_URL:8023/user/$userId";
 
     Map<String, String> headers = {
       'x-access-token': token,

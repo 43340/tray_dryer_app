@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tray_dryer_app/common/common.dart';
 import 'package:tray_dryer_app/models/detail_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,7 +31,7 @@ class _DetailsViewState extends State<DetailsView> {
   Future<List<Details>> getData(processId) async {
     final storage = new FlutterSecureStorage();
 
-    String link = "http://192.168.254.102:8023/data/$processId";
+    String link = "http://$BASE_URL:8023/data/$processId";
     String token = await storage.read(key: 'token');
 
     Map<String, String> headers = {

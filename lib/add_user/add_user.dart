@@ -46,7 +46,7 @@ class _AddNewUserState extends State<AddNewUser> {
     final storage = new FlutterSecureStorage();
 
     String token = await storage.read(key: 'token');
-    final String url = "http://192.168.254.102:8023/user";
+    final String url = "http://$BASE_URL:8023/user";
     Map<String, String> headers = {
       'x-access-token': token,
       'content-type': 'application/json'
