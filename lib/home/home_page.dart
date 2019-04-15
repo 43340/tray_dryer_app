@@ -41,8 +41,22 @@ class HomePage extends StatelessWidget {
                     height: 100,
                     fit: BoxFit.cover,
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 24, right: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
                   Image.asset(
                     'assets/icpep-logo.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  Image.asset(
+                    'assets/ceramic.jpg',
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
