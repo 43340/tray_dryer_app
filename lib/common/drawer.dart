@@ -35,19 +35,16 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          Card(
-            child: ListTile(
-              leading: new Icon(Icons.add),
-              title: new Text("New Process"),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          StartNewProcess("Start New Process")),
-                );
-              },
-            ),
+          ListTile(
+            leading: new Icon(Icons.add),
+            title: new Text("New Process"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => StartNewProcess("Start New Process")),
+              );
+            },
           ),
           ListTile(
             leading: new Icon(Icons.timer),

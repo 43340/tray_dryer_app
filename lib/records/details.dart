@@ -110,11 +110,14 @@ class _DetailsViewState extends State<DetailsView> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: list != null
-          ? Center(child: SingleChildScrollView(child: tableData(list)))
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: list != null
+            ? Center(child: SingleChildScrollView(child: tableData(list)))
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
+      ),
     );
   }
 }

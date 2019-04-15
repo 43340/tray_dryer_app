@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:tray_dryer_app/records/details.dart';
 import 'package:tray_dryer_app/authentication/authentication.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProcessListAll extends StatefulWidget {
   final String title;
@@ -130,7 +131,17 @@ class _ProcessListAllState extends State<ProcessListAll> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new Text(
-                              "Timer: ${process[position].cookTime} seconds"),
+                              "Initial Weight: ${process[position].initW} g"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text(
+                              "Final Weight: ${process[position].finalW} g"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new Text(
+                              "Process Timer: ${Duration(seconds: process[position].cookTime).toString().padLeft(15, '0').substring(0, 8)} seconds"),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -143,6 +154,30 @@ class _ProcessListAllState extends State<ProcessListAll> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new IconButton(
+                            icon: Icon(Icons.keyboard_arrow_right),
+                            iconSize: 30.0,
+                            tooltip: "Open details",
+                            onPressed: () => _onTapItem(
+                                context,
+                                process[position],
+                                process[position].processId,
+                                process[position].name),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: new IconButton(
+                            icon: Icon(Icons.cloud_download),
+                            iconSize: 30.0,
+                            tooltip: "Download Records",
+                            onPressed: () => _launchUrl(
+                                  process[position].processId,
+                                ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new IconButton(
@@ -188,19 +223,6 @@ class _ProcessListAllState extends State<ProcessListAll> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: new IconButton(
-                            icon: Icon(Icons.keyboard_arrow_right),
-                            iconSize: 30.0,
-                            tooltip: "Open details",
-                            onPressed: () => _onTapItem(
-                                context,
-                                process[position],
-                                process[position].processId,
-                                process[position].name),
-                          ),
-                        ),
                       ],
                     ),
                   ],
@@ -211,6 +233,12 @@ class _ProcessListAllState extends State<ProcessListAll> {
         },
       ),
     );
+  }
+
+  _launchUrl(process_id) async {
+    String url = "http://$BASE_URL:8023/process/report/$process_id";
+
+    await launch(url);
   }
 
   void _onTapItem(
