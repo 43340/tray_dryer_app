@@ -118,7 +118,7 @@ class _CurrentPageState extends State<CurrentPage> {
                             style:
                                 TextStyle(fontSize: 24, color: Colors.white)),
                         subtitle: Center(
-                            child: Text("$temp °C",
+                            child: Text("${temp.toString().substring(0, 5)} °C",
                                 style: TextStyle(
                                     fontSize: 48, color: Colors.white))),
                       ),
@@ -130,7 +130,7 @@ class _CurrentPageState extends State<CurrentPage> {
                             style:
                                 TextStyle(fontSize: 24, color: Colors.white)),
                         subtitle: Center(
-                            child: Text("$hum %",
+                            child: Text("${hum.toString().substring(0, 5)} %",
                                 style: TextStyle(
                                     fontSize: 48, color: Colors.white))),
                       ),

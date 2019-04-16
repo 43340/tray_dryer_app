@@ -65,7 +65,7 @@ class _ProcessListAllState extends State<ProcessListAll> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                  title: new Text("Delete data?"),
+                  title: new Text("Session Expired"),
                   content: new Text("Session Expired. Please login again."),
                   actions: <Widget>[
                     new FlatButton(

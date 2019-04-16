@@ -3,13 +3,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:tray_dryer_app/authentication/authentication.dart';
 import 'package:tray_dryer_app/common/common.dart';
 import 'package:tray_dryer_app/models/process_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:tray_dryer_app/records/details.dart';
+import 'package:tray_dryer_app/authentication/authentication.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProcessList extends StatefulWidget {
@@ -58,7 +58,25 @@ class _ProcessListState extends State<ProcessList> {
         print("List Size: ${list.length}");
         return list;
       } else {
-        sessionExpired(context);
+        final AuthenticationBloc authenticationBloc =
+            BlocProvider.of<AuthenticationBloc>(context);
+        authenticationBloc.dispatch(LoggedOut());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: new Text("Session Expired"),
+                  content: new Text("Session Expired. Please login again."),
+                  actions: <Widget>[
+                    new FlatButton(
+                      child: new Text("Ok"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ]);
+            });
       }
     });
   }
@@ -77,10 +95,6 @@ class _ProcessListState extends State<ProcessList> {
       link,
       headers: headers,
     );
-
-    if (response.statusCode != 200) {
-      sessionExpired(context);
-    }
   }
 
   Future<void> updateData(processId, finalW) async {
