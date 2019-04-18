@@ -58,35 +58,109 @@ class _DetailsViewState extends State<DetailsView> {
     return DataTable(
         columns: <DataColumn>[
           DataColumn(
-            label: Text(
-              "Temperature",
-              style: TextStyle(color: Colors.red, fontSize: 14.0),
-            ),
-            numeric: false,
-            onSort: (i, b) {},
-            tooltip: "Recorded Temperature",
-          ),
-          DataColumn(
-            label: Text(
-              "Humidity",
-              style: TextStyle(color: Colors.green, fontSize: 14.0),
-            ),
-            numeric: false,
-            onSort: (i, b) {},
-            tooltip: "Recorded Humidity",
-          ),
-          DataColumn(
             label: Text("Time",
                 style: TextStyle(color: Colors.blue, fontSize: 14.0)),
             numeric: false,
             onSort: (i, b) {},
             tooltip: "Recorded Time",
-          )
+          ),
+          DataColumn(
+            label: Text(
+              "Average Temperature",
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Temperature (Average)",
+          ),
+          DataColumn(
+            label: Text(
+              "Temperature (Chamber 1)",
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Temperature (Chamber 1)",
+          ),
+          DataColumn(
+            label: Text(
+              "Temperature (Chamber 2)",
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Temperature (Chamber 2)",
+          ),
+          DataColumn(
+            label: Text(
+              "Temperature (Chamber 3)",
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Temperature (Chamber 3)",
+          ),
+          DataColumn(
+            label: Text(
+              "Humidity (Average)",
+              style: TextStyle(color: Colors.green, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Humidity (Average)",
+          ),
+          DataColumn(
+            label: Text(
+              "Humidity (Chamber 1)",
+              style: TextStyle(color: Colors.green, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Humidity (Chamber 1)",
+          ),
+          DataColumn(
+            label: Text(
+              "Humidity (Chamber 2)",
+              style: TextStyle(color: Colors.green, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Humidity (Chamber 2)",
+          ),
+          DataColumn(
+            label: Text(
+              "Humidity (Chamber 3)",
+              style: TextStyle(color: Colors.green, fontSize: 14.0),
+            ),
+            numeric: false,
+            onSort: (i, b) {},
+            tooltip: "Recorded Humidity (Chamber 4)",
+          ),
         ],
         rows: details
             .map((detail) => DataRow(cells: [
                   DataCell(
+                    Text(detail.timeStamp),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
+                  DataCell(
                     Text(detail.temperature.toString()),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
+                  DataCell(
+                    Text(detail.temperature1.toString()),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
+                  DataCell(
+                    Text(detail.temperature2.toString()),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
+                  DataCell(
+                    Text(detail.temperature3.toString()),
                     showEditIcon: false,
                     placeholder: false,
                   ),
@@ -96,10 +170,20 @@ class _DetailsViewState extends State<DetailsView> {
                     placeholder: false,
                   ),
                   DataCell(
-                    Text(detail.timeStamp),
+                    Text(detail.humidity1.toString()),
                     showEditIcon: false,
                     placeholder: false,
-                  )
+                  ),
+                  DataCell(
+                    Text(detail.humidity2.toString()),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
+                  DataCell(
+                    Text(detail.humidity3.toString()),
+                    showEditIcon: false,
+                    placeholder: false,
+                  ),
                 ]))
             .toList());
   }
