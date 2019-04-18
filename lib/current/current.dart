@@ -62,7 +62,13 @@ class _CurrentPageState extends State<CurrentPage> {
           if (snapshot.hasData) {
             var current = snapshot.data;
             var temp = current["temperature"] ?? "";
+            var temp1 = current["temperature1"] ?? "";
+            var temp2 = current["temperature2"] ?? "";
+            var temp3 = current["temperature3"] ?? "";
             var hum = current["humidity"] ?? "";
+            var hum1 = current["humidity1"] ?? "";
+            var hum2 = current["humidity2"] ?? "";
+            var hum3 = current["humidity3"] ?? "";
             var time = current["timeleft"] ?? "";
             var stop = current["stop"] ?? "";
 
@@ -107,46 +113,145 @@ class _CurrentPageState extends State<CurrentPage> {
                 ),
               );
             } else {
-              return Center(
+              return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Card(
-                      color: const Color(0xFF26c6da),
-                      child: ListTile(
+                    ExpansionTile(
                         title: Text("Temperature",
                             style:
-                                TextStyle(fontSize: 24, color: Colors.white)),
-                        subtitle: Center(
-                            child: Text("${temp.toString().substring(0, 5)} °C",
-                                style: TextStyle(
-                                    fontSize: 48, color: Colors.white))),
-                      ),
-                    ),
-                    Card(
-                      color: const Color(0xFF26da86),
-                      child: ListTile(
+                                TextStyle(fontSize: 24, color: Colors.black)),
+                        children: <Widget>[
+                          Card(
+                            color: const Color(0xFF26c6da),
+                            child: ListTile(
+                              title: Text("Average Temperature",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${temp.toString().substring(0, 5)} °C", */
+                                  child: Text("${temp} °C",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26c6da),
+                            child: ListTile(
+                              title: Text("Temperature (Chamber 1)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${temp.toString().substring(0, 5)} °C", */
+                                  child: Text("${temp1} °C",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26c6da),
+                            child: ListTile(
+                              title: Text("Temperature (Chamber 2)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${temp.toString().substring(0, 5)} °C", */
+                                  child: Text("${temp2} °C",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26c6da),
+                            child: ListTile(
+                              title: Text("Temperature (Chamber 3)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${temp.toString().substring(0, 5)} °C", */
+                                  child: Text("${temp3} °C",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                        ]),
+                    ExpansionTile(
                         title: Text("Humidity",
                             style:
-                                TextStyle(fontSize: 24, color: Colors.white)),
-                        subtitle: Center(
-                            child: Text("${hum.toString().substring(0, 5)} %",
-                                style: TextStyle(
-                                    fontSize: 48, color: Colors.white))),
-                      ),
-                    ),
-                    Card(
-                      color: const Color(0xFFda2636),
-                      child: ListTile(
-                        title: Text("Time",
+                                TextStyle(fontSize: 24, color: Colors.black)),
+                        children: <Widget>[
+                          Card(
+                            color: const Color(0xFF26da86),
+                            child: ListTile(
+                              title: Text("Average Humidity",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${hum.toString().substring(0, 5)} %", */
+                                  child: Text("${hum} %",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26da86),
+                            child: ListTile(
+                              title: Text("Humidity (Chamber 1)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${hum.toString().substring(0, 5)} %", */
+                                  child: Text("${hum1} %",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26da86),
+                            child: ListTile(
+                              title: Text("Humidity (Chamber 2)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${hum.toString().substring(0, 5)} %", */
+                                  child: Text("${hum2} %",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                          Card(
+                            color: const Color(0xFF26da86),
+                            child: ListTile(
+                              title: Text("Humidity (Chamber 3)",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  /* child: Text("${hum.toString().substring(0, 5)} %", */
+                                  child: Text("${hum3} %",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                        ]),
+                    ExpansionTile(
+                        initiallyExpanded: true,
+                        title: Text("Timer",
                             style:
-                                TextStyle(fontSize: 24, color: Colors.white)),
-                        subtitle: Center(
-                            child: Text("$time",
-                                style: TextStyle(
-                                    fontSize: 48, color: Colors.white))),
-                      ),
-                    ),
+                                TextStyle(fontSize: 24, color: Colors.black)),
+                        children: <Widget>[
+                          Card(
+                            color: const Color(0xFFda2636),
+                            child: ListTile(
+                              title: Text("Time",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white)),
+                              subtitle: Center(
+                                  child: Text("$time",
+                                      style: TextStyle(
+                                          fontSize: 48, color: Colors.white))),
+                            ),
+                          ),
+                        ]),
                     FlatButton(
                       color: Colors.red,
                       textColor: Colors.white,

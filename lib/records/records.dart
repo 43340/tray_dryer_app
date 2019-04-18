@@ -155,8 +155,10 @@ class _ProcessListState extends State<ProcessList> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: new Text(
-                              "Final Weight: ${process[position].finalW} g"),
+                          child: process[position].finalW == null
+                              ? new Text("0 g")
+                              : new Text(
+                                  "Final Weight: ${process[position].finalW} g"),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
