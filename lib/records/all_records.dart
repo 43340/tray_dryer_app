@@ -97,28 +97,6 @@ class _ProcessListAllState extends State<ProcessListAll> {
     );
   }
 
-  Future<void> updateData(processId, finalW) async {
-    final storage = new FlutterSecureStorage();
-    String token = await storage.read(key: 'token');
-
-    String link = "http://$BASE_URL:8023/process/$processId/$finalW";
-
-    Map<String, String> headers = {
-      'x-access-token': token,
-    };
-
-    var response = await http.put(
-      link,
-      headers: headers,
-    );
-
-    if (response.statusCode != 200) {
-      sessionExpired(context);
-    } else {
-      _launchUrl(processId);
-    }
-  }
-
   Widget listViewWidget(List<Process> process) {
     return Container(
       child: ListView.builder(
@@ -155,18 +133,6 @@ class _ProcessListAllState extends State<ProcessListAll> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new Text(
-                              "Initial Weight: ${process[position].initW} g"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: process[position].finalW == null
-                              ? new Text("0 g")
-                              : new Text(
-                                  "Final Weight: ${process[position].finalW} g"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: new Text(
                               "Process Timer: ${Duration(seconds: process[position].cookTime).toString().padLeft(15, '0').substring(0, 8)}"),
                         ),
                         Padding(
@@ -193,7 +159,7 @@ class _ProcessListAllState extends State<ProcessListAll> {
                                 process[position].name),
                           ),
                         ),
-                        /* Padding(
+                        Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: new IconButton(
                             icon: Icon(Icons.cloud_download),
@@ -202,70 +168,6 @@ class _ProcessListAllState extends State<ProcessListAll> {
                             onPressed: () => _launchUrl(
                                   process[position].processId,
                                 ),
-                          ),
-                        ), */
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: new IconButton(
-                            icon: Icon(Icons.cloud_download),
-                            iconSize: 30.0,
-                            onPressed: () async {
-                              bool shouldUpdate = await showDialog(
-                                  context: this.context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                        title: new Text("Delete data?"),
-                                        content: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                                "Name: ${process[position].name}"),
-                                            Text(
-                                                "Set Temperature: ${process[position].setTemp} °C"),
-                                            Text(
-                                                "Timer: ${Duration(seconds: process[position].cookTime).toString().padLeft(15, '0').substring(0, 8)}"),
-                                            Text(
-                                                "Read Interval: ${process[position].readInt} seconds"),
-                                            Text(
-                                                "Time Stamp: ${process[position].timeStamp}"),
-                                            Text(
-                                                "Initial Weight: ${process[position].initW} g"),
-                                            TextFormField(
-                                                decoration: InputDecoration(
-                                                  labelText: 'Final Weight',
-                                                ),
-                                                controller:
-                                                    _finalWeightController,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: <
-                                                    TextInputFormatter>[
-                                                  WhitelistingTextInputFormatter
-                                                      .digitsOnly
-                                                ]),
-                                          ],
-                                        ),
-                                        actions: <Widget>[
-                                          new FlatButton(
-                                            child: new Text("Cancel"),
-                                            onPressed: () {
-                                              Navigator.pop(context, false);
-                                            },
-                                          ),
-                                          new FlatButton(
-                                            child: new Text("Confirm"),
-                                            onPressed: () {
-                                              updateData(
-                                                  process[position].processId,
-                                                  _finalWeightController.text);
-                                              Navigator.pop(context, true);
-                                              Navigator.pop(context, true);
-                                            },
-                                          ),
-                                        ]);
-                                  });
-                            },
                           ),
                         ),
                         Padding(

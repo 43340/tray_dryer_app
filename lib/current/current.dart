@@ -130,7 +130,8 @@ class _CurrentPageState extends State<CurrentPage> {
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${temp.toString().substring(0, 5)} °C", */
-                                  child: Text("${temp} °C",
+                                  child: Text(
+                                      "${num.parse(temp).toStringAsFixed(2)} °C",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -138,12 +139,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26c6da),
                             child: ListTile(
-                              title: Text("Temperature (Chamber 1)",
+                              title: Text("Temperature (Sensor 1)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${temp.toString().substring(0, 5)} °C", */
-                                  child: Text("${temp1} °C",
+                                  child: Text(
+                                      "${num.parse(temp1).toStringAsFixed(2)} °C",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -151,12 +153,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26c6da),
                             child: ListTile(
-                              title: Text("Temperature (Chamber 2)",
+                              title: Text("Temperature (Sensor 2)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${temp.toString().substring(0, 5)} °C", */
-                                  child: Text("${temp2} °C",
+                                  child: Text(
+                                      "${num.parse(temp2).toStringAsFixed(2)} °C",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -164,12 +167,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26c6da),
                             child: ListTile(
-                              title: Text("Temperature (Chamber 3)",
+                              title: Text("Temperature (Sensor 3)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${temp.toString().substring(0, 5)} °C", */
-                                  child: Text("${temp3} °C",
+                                  child: Text(
+                                      "${num.parse(temp3).toStringAsFixed(2)} °C",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -188,7 +192,8 @@ class _CurrentPageState extends State<CurrentPage> {
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${hum.toString().substring(0, 5)} %", */
-                                  child: Text("${hum} %",
+                                  child: Text(
+                                      "${num.parse(hum).toStringAsFixed(2)} %",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -196,12 +201,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26da86),
                             child: ListTile(
-                              title: Text("Humidity (Chamber 1)",
+                              title: Text("Humidity (Sensor 1)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${hum.toString().substring(0, 5)} %", */
-                                  child: Text("${hum1} %",
+                                  child: Text(
+                                      "${num.parse(hum1).toStringAsFixed(2)} %",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -209,12 +215,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26da86),
                             child: ListTile(
-                              title: Text("Humidity (Chamber 2)",
+                              title: Text("Humidity (Sensor 2)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${hum.toString().substring(0, 5)} %", */
-                                  child: Text("${hum2} %",
+                                  child: Text(
+                                      "${num.parse(hum2).toStringAsFixed(2)} %",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -222,12 +229,13 @@ class _CurrentPageState extends State<CurrentPage> {
                           Card(
                             color: const Color(0xFF26da86),
                             child: ListTile(
-                              title: Text("Humidity (Chamber 3)",
+                              title: Text("Humidity (Sensor 3)",
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
                                   /* child: Text("${hum.toString().substring(0, 5)} %", */
-                                  child: Text("${hum3} %",
+                                  child: Text(
+                                      "${num.parse(hum3).toStringAsFixed(2)} %",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),
@@ -246,7 +254,8 @@ class _CurrentPageState extends State<CurrentPage> {
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
-                                  child: Text("$time",
+                                  child: Text(
+                                      "${Duration(seconds: (time - 2)).toString().padLeft(15, '0').substring(0, 8)}",
                                       style: TextStyle(
                                           fontSize: 48, color: Colors.white))),
                             ),

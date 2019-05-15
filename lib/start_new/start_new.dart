@@ -18,10 +18,8 @@ class StartNewProcess extends StatefulWidget {
 class _StartNewProcessState extends State<StartNewProcess> {
   final _nameController = TextEditingController();
   final _setTemperatureController = TextEditingController();
-  final _initialWeightController = TextEditingController();
   final _processTimerHController = TextEditingController();
   final _processTimerMController = TextEditingController();
-  final _processTimerSController = TextEditingController();
   final _readIntervalController = TextEditingController();
 
   void _showDialog(title, body) {
@@ -46,7 +44,6 @@ class _StartNewProcessState extends State<StartNewProcess> {
   Future<void> sendData({
     @required String name,
     @required int setTemperature,
-    @required int initialWeight,
     @required int processTimer,
     @required int readInterval,
   }) async {
@@ -62,7 +59,6 @@ class _StartNewProcessState extends State<StartNewProcess> {
     Map<String, dynamic> body = {
       'name': name,
       'stemp': setTemperature,
-      'initw': initialWeight,
       'ctime': processTimer,
       'rinte': readInterval
     };
@@ -86,20 +82,16 @@ class _StartNewProcessState extends State<StartNewProcess> {
   void _clearInputFields() {
     _nameController.text = '';
     _setTemperatureController.text = '';
-    _initialWeightController.text = '';
     _processTimerHController.text = '';
     _processTimerMController.text = '';
-    _processTimerSController.text = '';
     _readIntervalController.text = '';
   }
 
   _onSubmitButtonPressed() {
     if (_nameController.text.isEmpty ||
         _setTemperatureController.text.isEmpty ||
-        _initialWeightController.text.isEmpty ||
         _processTimerHController.text.isEmpty ||
         _processTimerMController.text.isEmpty ||
-        _processTimerSController.text.isEmpty ||
         _readIntervalController.text.isEmpty) {
       _showDialog(
           'Error', 'Fields should not be empty.\nPlease fillup all the forms');
@@ -107,10 +99,8 @@ class _StartNewProcessState extends State<StartNewProcess> {
 
     String name = _nameController.text;
     int setTemperature = int.parse(_setTemperatureController.text);
-    int initialWeight = int.parse(_initialWeightController.text);
     int processTimerH = int.parse(_processTimerHController.text);
     int processTimerM = int.parse(_processTimerMController.text);
-    int processTimerS = int.parse(_processTimerSController.text);
     int readInterval = int.parse(_readIntervalController.text);
 
     _clearInputFields();
@@ -118,11 +108,8 @@ class _StartNewProcessState extends State<StartNewProcess> {
     sendData(
         name: name,
         setTemperature: setTemperature,
-        initialWeight: initialWeight,
-        processTimer: (((processTimerH * 60) * 60) +
-            (processTimerM * 60) +
-            processTimerS),
-        readInterval: readInterval);
+        processTimer: (((processTimerH * 60) * 60) + (processTimerM * 60)),
+        readInterval: readInterval * 60);
   }
 
   @override
@@ -180,28 +167,6 @@ class _StartNewProcessState extends State<StartNewProcess> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Initial Weight',
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      )),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2.0,
-                      )),
-                    ),
-                    controller: _initialWeightController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                    decoration: InputDecoration(
                       labelText: 'Process Timer (Hours)',
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -237,28 +202,6 @@ class _StartNewProcessState extends State<StartNewProcess> {
                       )),
                     ),
                     controller: _processTimerMController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      WhitelistingTextInputFormatter.digitsOnly
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Process Timer (Seconds)',
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      )),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        color: Colors.blueAccent,
-                        width: 2.0,
-                      )),
-                    ),
-                    controller: _processTimerSController,
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       WhitelistingTextInputFormatter.digitsOnly
