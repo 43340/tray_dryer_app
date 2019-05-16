@@ -70,6 +70,7 @@ class _CurrentPageState extends State<CurrentPage> {
             var hum2 = current["humidity2"] ?? "";
             var hum3 = current["humidity3"] ?? "";
             var time = current["timeleft"] ?? "";
+            var open = current["open_time"] ?? "";
             var stop = current["stop"] ?? "";
 
             if (stop) {
@@ -254,10 +255,16 @@ class _CurrentPageState extends State<CurrentPage> {
                                   style: TextStyle(
                                       fontSize: 24, color: Colors.white)),
                               subtitle: Center(
-                                  child: Text(
-                                      "${Duration(seconds: (time - 2)).toString().padLeft(15, '0').substring(0, 8)}",
-                                      style: TextStyle(
-                                          fontSize: 48, color: Colors.white))),
+                                  child: (open == 1)
+                                      ? Text(
+                                          "${Duration(seconds: (time - 2)).toString().padLeft(15, '0').substring(0, 8)}",
+                                          style: TextStyle(
+                                              fontSize: 48,
+                                              color: Colors.white))
+                                      : Text("$time",
+                                          style: TextStyle(
+                                              fontSize: 48,
+                                              color: Colors.white))),
                             ),
                           ),
                         ]),
